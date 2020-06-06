@@ -9,7 +9,10 @@ services:
         ports:
             - 80:80
         volumes:
-            - /var/www/html:/var/www/html
+            # Para linux
+            #- /var/www/html:/var/www/html
+            # Para windows
+            - /c/mihtml:/var/www/html
         links:
             - 'mariadb'
 
@@ -22,8 +25,13 @@ services:
         volumes:           
             #- persistdb:/var/lib/mysql_local
            # - ./dbfiles:/docker-entrypoint-initdb.d
-            - /var/dbbackup:/docker-entrypoint-initdb.d
-            - /var/lib/mysql:/var/lib/mysql
+            # Para linux
+            #- /var/dbbackup:/docker-entrypoint-initdb.d
+            #- /var/lib/mysql:/var/lib/mysql
+            # Para windows
+            - /c/mibackup:/docker-entrypoint-initdb.d
+            - /c/mimysql:/var/lib/mysql
+
         environment:
             TZ: "Europe/Madrid"
             MYSQL_ALLOW_EMPTY_PASSWORD: "no"
