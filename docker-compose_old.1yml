@@ -10,9 +10,9 @@ services:
             - 80:80
         volumes:
             # Para linux
-            - /var/www/html:/var/www/html
+            #- /var/www/html:/var/www/html
             # Para windows
-            #- /c/mihtml:/var/www/html
+            - /c/mihtml:/var/www/html
         links:
             - 'mariadb'
 
@@ -26,18 +26,18 @@ services:
             #- persistdb:/var/lib/mysql_local
            # - ./dbfiles:/docker-entrypoint-initdb.d
             # Para linux
-            - /var/dbbackup:/docker-entrypoint-initdb.d
-            - /var/lib/mysql:/var/lib/mysql
+            #- /var/dbbackup:/docker-entrypoint-initdb.d
+            #- /var/lib/mysql:/var/lib/mysql
             # Para windows
-            #- /c/mibackup:/docker-entrypoint-initdb.d
-            #- /c/mimysql:/var/lib/mysql
+            - /c/mibackup:/docker-entrypoint-initdb.d
+            - /c/mimysql:/var/lib/mysql
 
         environment:
             TZ: "Europe/Madrid"
             MYSQL_ALLOW_EMPTY_PASSWORD: "no"
-            MYSQL_ROOT_PASSWORD: "osmel5458"
+            MYSQL_ROOT_PASSWORD: "contrasena"
             MYSQL_USER: 'osmel'
-            MYSQL_PASSWORD: 'osmel5458'
+            MYSQL_PASSWORD: 'contrasena'
             MYSQL_DATABASE: 'dossierlegal'
 
     phpmyadmin:
@@ -51,7 +51,7 @@ services:
             - 9996:80
         environment:
             MYSQL_USER: 'osmel'
-            MYSQL_PASSWORD: 'osmel5458'
+            MYSQL_PASSWORD: 'contrasena'
             MYSQL_DATABASE: 'dossierlegal'
             PMA_HOST: mariadb
             #PMA_ARBITRARY=1

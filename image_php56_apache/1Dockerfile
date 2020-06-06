@@ -125,9 +125,9 @@ ENV PHP_INI_DIR /usr/local/etc/php
 # COPY ./php.ini /usr/local/etc/php/
 
 #   copiar mis ficheros de virtualhost
-COPY ./kerma.dev.com.conf  /etc/apache2/sites-available/ 
-RUN ln -s /etc/apache2/sites-available/kerma.dev.com.conf /etc/apache2/sites-enabled; \
-    a2ensite kerma.dev.com.conf; \
+COPY ./prueba.dev.com.conf  /etc/apache2/sites-available/ 
+RUN ln -s /etc/apache2/sites-available/prueba.dev.com.conf /etc/apache2/sites-enabled; \
+    a2ensite prueba.dev.com.conf; \
     a2enmod rewrite;\
     service apache2 restart; \
     apt-get install --no-install-recommends --no-install-suggests -y nano

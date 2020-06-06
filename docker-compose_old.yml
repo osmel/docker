@@ -35,9 +35,9 @@ services:
         environment:
             TZ: "Europe/Madrid"
             MYSQL_ALLOW_EMPTY_PASSWORD: "no"
-            MYSQL_ROOT_PASSWORD: "osmel5458"
+            MYSQL_ROOT_PASSWORD: "contrasena"
             MYSQL_USER: 'osmel'
-            MYSQL_PASSWORD: 'osmel5458'
+            MYSQL_PASSWORD: 'contrasena'
             MYSQL_DATABASE: 'dossierlegal'
 
     phpmyadmin:
@@ -51,7 +51,7 @@ services:
             - 9996:80
         environment:
             MYSQL_USER: 'osmel'
-            MYSQL_PASSWORD: 'osmel5458'
+            MYSQL_PASSWORD: 'contrasena'
             MYSQL_DATABASE: 'dossierlegal'
             PMA_HOST: mariadb
             #PMA_ARBITRARY=1
