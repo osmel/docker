@@ -1,0 +1,51 @@
+version: '3.7'
+services:
+    php_apache_server:
+        build:
+          context: ./image_php56_apache
+        container_name: servidor_web
+        depends_on:
+          - mariadb
+        ports:
+            - 80:80
+        volumes:
+            - /var/www/html:/var/www/html
+        links:
+            - 'mariadb'
+
+    mariadb:
+        container_name: servidor_dbs
+        build:
+          context: ./image_mariadb10
+        ports:
+          - 3306:3306
+        volumes:           
+            #- persistdb:/var/lib/mysql_local
+           # - ./dbfiles:/docker-entrypoint-initdb.d
+            - /var/dbbackup:/docker-entrypoint-initdb.d
+            - /var/lib/mysql:/var/lib/mysql
+        environment:
+            TZ: "Europe/Madrid"
+            MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+            MYSQL_ROOT_PASSWORD: "contrasena"
+            MYSQL_USER: 'osmel'
+            MYSQL_PASSWORD: 'contrasena'
+            MYSQL_DATABASE: 'dossierlegal'
+
+    phpmyadmin:
+        container_name: phpMyadmin
+        image: phpmyadmin/phpmyadmin
+        depends_on:
+          - mariadb
+        links: 
+            - mariadb
+        ports:
+            - 9996:80
+        environment:
+            MYSQL_USER: 'osmel'
+            MYSQL_PASSWORD: 'contrasena'
+            MYSQL_DATABASE: 'dossierlegal'
+            PMA_HOST: mariadb
+            #PMA_ARBITRARY=1
+#volumes:
+    #persistdb:
